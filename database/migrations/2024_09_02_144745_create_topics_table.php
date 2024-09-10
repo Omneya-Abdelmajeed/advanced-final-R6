@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('topicTitle', 100);
             $table->text('content');
+            $table->integer('views')->default(false);
             $table->boolean('trending');
             $table->boolean('published');
             $table->string('image');

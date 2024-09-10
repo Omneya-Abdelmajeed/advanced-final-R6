@@ -9,7 +9,7 @@
   <div class="container my-5">
     <div class="mx-2">
       <h2 class="fw-bold fs-2 mb-5 pb-2">Add Topic</h2>
-      <form action="{{route('topics.store')}}" method="POST"  enctype="multipart/form-data" class="px-md-5">
+      <form action="{{route('admin.topics.store')}}" method="POST"  enctype="multipart/form-data" class="px-md-5">
       @csrf
         <div class="form-group mb-3 row">
           <label for="" class="form-label col-md-2 fw-bold text-md-end">Topic Title:</label>

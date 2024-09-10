@@ -4,12 +4,12 @@
 @include('admin.includes.head')
 
 <body>
-  @include('admin.includes.head')
+  @include('admin.includes.header')
 
   <div class="container my-5">
     <div class="mx-2">
       <h2 class="fw-bold fs-2 mb-5 pb-2">Add USER</h2>
-      <form action="{{route('users.store')}}" method="POST" class="px-md-5">
+      <form action="{{route('admin.users.store')}}" method="POST" class="px-md-5">
         @csrf
         <div class="form-group mb-3 row">
           <label for="" class="form-label col-md-2 fw-bold text-md-end">Name:</label>
@@ -47,7 +47,7 @@
         <div class="form-group mb-3 row">
           <label for="" class="form-label col-md-2 fw-bold text-md-end">Password:</label>
           <div class="col-md-10">
-            <input type="password" placeholder="Password" class="form-control py-2" name="password"/>
+            <input type="password" class="form-control py-2" name="password"/>
             @error('password')
               <div class="alert alert-warning">{{$message}}</div>
             @enderror

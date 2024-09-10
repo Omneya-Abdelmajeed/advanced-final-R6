@@ -9,7 +9,7 @@
   <div class="container my-5">
     <div class="mx-2">
       <h2 class="fw-bold fs-2 mb-5 pb-2">Edit Testimonial</h2>
-      <form action="{{route('testimonials.update', $testimonial->id)}}" method="POST" enctype="multipart/form-data" class="px-md-5">
+      <form action="{{route('admin.testimonials.update', $testimonial->id)}}" method="POST" enctype="multipart/form-data" class="px-md-5">
         @csrf
         @method('put')
         <div class="form-group mb-3 row">
@@ -45,7 +45,7 @@
 
             @if($testimonial['image'])
               <div class="mb-3">
-                <img src="{{asset('admin/assets/images/testimonials/' . $testimonial['image'])}}" alt="Testimonial_img" style="width: 10rem;">
+                <img src="{{asset('assets/images/testimonials/' . $testimonial['image'])}}" alt="Testimonial_img" style="width: 10rem;">
               </div>
             @endif
 
