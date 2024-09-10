@@ -21,30 +21,21 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach($unreadMessages as $unreadMessage)
                         <tr>
-                            <th scope="row">18 Jul 2024</th>
-                            <td><a href="message_details.html" class="text-decoration-none text-dark">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis possimus distinctio amet in explicabo ea perspiciatis, sit, modi quasi illo...</a></td>
-                            <td>Jhon Doe</td>
-                            <td class="text-center"><a class="text-decoration-none text-dark" href="#"><img src="{{asset('admin/assets/images/trash-can-svgrepo-com.svg')}}"></a></td>
+                            <th scope="row">{{date('d M Y', strtotime($unreadMessage['created_at']))}}</th>
+                            <td><a href="{{ route('admin.message.details', $unreadMessage->id) }}" class="text-decoration-none text-dark">{{Str::limit($unreadMessage['message'], 20)}}</a></td>
+                            <td>{{$unreadMessage['name']}}</td>
+                            <td class="text-center"><a class="text-decoration-none text-dark">
+                                <form action="{{route('admin.message.destroy', $unreadMessage->id)}}" method="POST" method="POST" onclick="return confirm('Are you sure you want to delete?')">
+                                @csrf
+                                @method('delete')
+                                <button type="submit" class="btn btn-link m-0 p-0"><img src="{{asset('admin/assets/images/trash-can-svgrepo-com.svg')}}"></button> 
+                                </form></a>
+                            </td>
                         </tr>
-                        <tr>
-                            <th scope="row">18 Jul 2024</th>
-                            <td><a href="message_details.html" class="text-decoration-none text-dark">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis possimus distinctio amet in explicabo ea perspiciatis, sit, modi quasi illo...</a></td>
-                            <td>Jhon Doe</td>
-                            <td class="text-center"><a class="text-decoration-none text-dark" href="#"><img src="{{asset('admin/assets/images/trash-can-svgrepo-com.svg')}}"></a></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">18 Jul 2024</th>
-                            <td><a href="message_details.html" class="text-decoration-none text-dark">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis possimus distinctio amet in explicabo ea perspiciatis, sit, modi quasi illo...</a></td>
-                            <td>Jhon Doe</td>
-                            <td class="text-center"><a class="text-decoration-none text-dark" href="#"><img src="{{asset('admin/assets/images/trash-can-svgrepo-com.svg')}}"></a></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">18 Jul 2024</th>
-                            <td><a href="message_details.html" class="text-decoration-none text-dark">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis possimus distinctio amet in explicabo ea perspiciatis, sit, modi quasi illo...</a></td>
-                            <td>Jhon Doe</td>
-                            <td class="text-center"><a class="text-decoration-none text-dark" href="#"><img src="{{asset('admin/assets/images/trash-can-svgrepo-com.svg')}}"></a></td>
-                        </tr>
+                        @endforeach
+
                     </tbody>
                 </table>
             </div>
@@ -65,30 +56,21 @@
                         </tr>
                     </thead>
                     <tbody>
+                    @foreach($readMessages as $readMessage)
                         <tr>
-                            <th scope="row">18 Jul 2024</th>
-                            <td><a href="message_details.html" class="text-decoration-none text-dark">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis possimus distinctio amet in explicabo ea perspiciatis, sit, modi quasi illo...</a></td>
-                            <td>Jhon Doe</td>
-                            <td class="text-center"><a class="text-decoration-none text-dark" href="#"><img src="{{asset('admin/assets/images/trash-can-svgrepo-com.svg')}}"></a></td>
+                            <th scope="row">{{date('d M Y', strtotime($readMessage['created_at']))}}</th>
+                            <td><a href="{{ route('admin.message.details', $readMessage->id) }}" class="text-decoration-none text-dark">{{Str::limit($readMessage['message'],20)}}</a></td>
+                            <td>{{$readMessage['name']}}</td>
+                            <td class="text-center"><a class="text-decoration-none text-dark">
+                                <form action="{{route('admin.message.destroy', $readMessage->id)}}" method="POST" method="POST" onclick="return confirm('Are you sure you want to delete?')">
+                                @csrf
+                                @method('delete')
+                                <button type="submit" class="btn btn-link m-0 p-0"><img src="{{asset('admin/assets/images/trash-can-svgrepo-com.svg')}}"></button> 
+                                </form></a>
+                            </td>
                         </tr>
-                        <tr>
-                            <th scope="row">18 Jul 2024</th>
-                            <td><a href="message_details.html" class="text-decoration-none text-dark">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis possimus distinctio amet in explicabo ea perspiciatis, sit, modi quasi illo...</a></td>
-                            <td>Jhon Doe</td>
-                            <td class="text-center"><a class="text-decoration-none text-dark" href="#"><img src="{{asset('admin/assets/images/trash-can-svgrepo-com.svg')}}"></a></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">18 Jul 2024</th>
-                            <td><a href="message_details.html" class="text-decoration-none text-dark">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis possimus distinctio amet in explicabo ea perspiciatis, sit, modi quasi illo...</a></td>
-                            <td>Jhon Doe</td>
-                            <td class="text-center"><a class="text-decoration-none text-dark" href="#"><img src="{{asset('admin/assets/images/trash-can-svgrepo-com.svg')}}"></a></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">18 Jul 2024</th>
-                            <td><a href="message_details.html" class="text-decoration-none text-dark">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis possimus distinctio amet in explicabo ea perspiciatis, sit, modi quasi illo...</a></td>
-                            <td>Jhon Doe</td>
-                            <td class="text-center"><a class="text-decoration-none text-dark" href="#"><img src="{{asset('admin/assets/images/trash-can-svgrepo-com.svg')}}"></a></td>
-                        </tr>
+                        @endforeach
+
                     </tbody>
                 </table>
             </div>

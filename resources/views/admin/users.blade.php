@@ -9,7 +9,7 @@
         <div class="mx-2">
             <div class="row justify-content-between mb-2 pb-2">
                 <h2 class="fw-bold fs-2 col-auto">All Users</h2>
-                <a href="{{route('users.create')}}" class="btn btn-link  link-dark fw-semibold col-auto me-3">➕Add new user</a>
+                <a href="{{route('admin.users.create')}}" class="btn btn-link  link-dark fw-semibold col-auto me-3">➕Add new user</a>
             </div>
             <div class="table-responsive">
                 <table class="table table-hover display" id="_table">
@@ -32,9 +32,9 @@
                                 <td>{{$user->userName}}</td>
                                 <td>{{$user->email}}</td>
                                 <td>{{$user['active'] ? 'YES' : 'NO'}}</td>
-                                <td class="text-center"><a class="text-decoration-none text-dark" href="{{route('users.edit', $user['id'])}}"><img src="{{asset('admin/assets/images/edit-svgrepo-com.svg')}}"></a></td>
+                                <td class="text-center"><a class="text-decoration-none text-dark" href="{{route('admin.users.edit', $user['id'])}}"><img src="{{asset('admin/assets/images/edit-svgrepo-com.svg')}}"></a></td>
                             </tr>
-                        @endforeach                       
+                        @endforeach
                     </tbody>
                 </table>
             </div>

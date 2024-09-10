@@ -9,7 +9,7 @@
   <div class="container my-5">
     <div class="mx-2">
       <h2 class="fw-bold fs-2 mb-5 pb-2">Edit Topic</h2>
-      <form action="{{route('topics.update', $topic->id)}}" method="POST" enctype="multipart/form-data" class="px-md-5">
+      <form action="{{route('admin.topics.update', $topic->id)}}" method="POST" enctype="multipart/form-data" class="px-md-5">
         @csrf
         @method('put')
         <div class="form-group mb-3 row">
@@ -66,7 +66,7 @@
 
             @if($topic['image'])
               <div class="mb-3">
-                <img src="{{asset('admin/assets/images/topics/' . $topic['image'])}}" alt="article_image" style="width: 10rem;">
+                <img src="{{asset('assets/images/topics/' . $topic['image'])}}" alt="article_image" style="width: 10rem;">
               </div>
             @endif
             

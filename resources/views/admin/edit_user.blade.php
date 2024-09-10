@@ -9,11 +9,12 @@
   <div class="container my-5">
     <div class="mx-2">
       <h2 class="fw-bold fs-2 mb-5 pb-2">Edit USER</h2>
-      <form action="{{route('users.update', $user->id)}}" method="POST" class="px-md-5">
+      <form action="{{ route('admin.users.update', $user->id) }}" method="POST" class="px-md-5">
         @csrf
         @method('put')
+
         <div class="form-group mb-3 row">
-          <label for="name" class="form-label col-md-2 fw-bold text-md-end">Name:</label>
+          <label for="firstName" class="form-label col-md-2 fw-bold text-md-end">Name:</label>
           <div class="col-md-5">
             <input type="text" placeholder="First Name" class="form-control py-2" name="firstName" value="{{old('firstName', $user['firstName'])}}"/>
             @error('firstName')
@@ -48,7 +49,7 @@
         <div class="form-group mb-3 row">
           <label for="" class="form-label col-md-2 fw-bold text-md-end">Password:</label>
           <div class="col-md-10">
-            <input type="password" placeholder="Password" class="form-control py-2" name="password"/>
+            <input type="password"  class="form-control py-2" name="password"/>
             @error('password')
               <div class="alert alert-warning">{{$message}}</div>
             @enderror
