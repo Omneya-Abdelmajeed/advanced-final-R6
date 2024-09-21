@@ -24,7 +24,8 @@ class PublicController extends Controller
                 $query->where('published', true)->orderBy('views', 'desc')->take(3);
             }
         ])
-            ->limit(5) // limit to 5 categories
+            ->limit(6) // limit to 6 categories
+            ->latest()
             ->get();
         // dd($categories);
 

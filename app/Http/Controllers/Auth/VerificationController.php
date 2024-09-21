@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Auth\Events\Verified;
 use Illuminate\Foundation\Auth\VerifiesEmails;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class VerificationController extends Controller
 {
@@ -16,7 +19,7 @@ class VerificationController extends Controller
     | user that recently registered with the application. Emails may also
     | be re-sent if the user didn't receive the original email message.
     |
-    */
+     */
 
     use VerifiesEmails;
 
@@ -25,7 +28,27 @@ class VerificationController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/login';
+
+    /**
+     * Mark the authenticated user's email address as verified.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     */
+    public function verify(Request $request)
+    {
+        $user = Auth::user();
+
+        if ($request->route('id') == $user->getKey() && $user->markEmailAsVerified()) {
+            event(new Verified($user));
+        }
+
+        // Log the user out after verification
+        Auth::logout();
+
+        // Redirect to the login page
+        return redirect('/login');
+    }
 
     /**
      * Create a new controller instance.

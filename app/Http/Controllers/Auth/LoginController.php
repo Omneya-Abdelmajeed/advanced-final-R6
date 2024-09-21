@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 
 class LoginController extends Controller
 {
@@ -25,7 +27,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/admin/users';
 
     /**
      * Create a new controller instance.
@@ -48,26 +50,49 @@ class LoginController extends Controller
         return 'userName';
     }
 
-    // /**
-    //  * Attempt to log the user into the application.
-    //  *
-    //  * @param  \Illuminate\Http\Request  $request
-    //  * @return bool
-    //  */
-    // protected function attemptLogin(Request $request)
-    // {
-    //     // Attempt to log in with the provided credentials.
-    //     if ($this->guard()->attempt($this->credentials($request), $request->boolean('remember'))) {
-    //         $user = $this->guard()->user(); // Retrieve the authenticated user.
+    /**
+     * Attempt to log the user into the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return bool
+     */
+    protected function attemptLogin(Request $request)
+    {
+        // Attempt to log in with the provided credentials.
+        if ($this->guard()->attempt($this->credentials($request), $request->boolean('remember'))) {
+            $user = $this->guard()->user(); // Retrieve the authenticated user.
 
-    //         // Check if the authenticated user is active.
-    //         if ($user->active) {
-    //             return true;
-    //         } else {
-    //             $this->guard()->logout(); // Logout the user if not active.
-    //             redirect()->back()->with('note', 'Your account is inactive!');
-    //             return false;
-    //         }
-    //     }
-    // }
+            // Check if the authenticated user is active.
+            if ($user->active) {
+                return true;
+            } else {
+                $this->guard()->logout(); // Logout the user if not active.
+                redirect()->back()->with('note', 'Your account is inactive!');
+                return false;
+            }
+        }
+    }
+
+        /**
+     * Log the user out of the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
+     */
+    public function logout(Request $request)
+    {
+        $this->guard()->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        if ($response = $this->loggedOut($request)) {
+            return $response;
+        }
+
+        return $request->wantsJson()
+            ? new JsonResponse([], 204)
+            : redirect('/login');
+    }
 }
