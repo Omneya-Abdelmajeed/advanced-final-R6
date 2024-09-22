@@ -79,7 +79,6 @@ Route::group(['middleware' => 'verified',
         'as' => 'message.',
     ], function () {
         Route::get('', 'index')->name('index');
-        Route::post('mark-as-read/{id}', 'markAsRead')->name('markAsRead');
         Route::delete('{id}', 'destroy')->name('destroy');
         Route::get('{id}/details', 'show')->name('details');
     });

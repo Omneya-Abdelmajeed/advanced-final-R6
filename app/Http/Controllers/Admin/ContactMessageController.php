@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Contact;
-use Illuminate\Http\Request;
 
 class ContactMessageController extends Controller
 {
@@ -19,19 +18,6 @@ class ContactMessageController extends Controller
 
         // Return the view which contains all messages with unread and read messages.
         return view('admin.messages', compact('unreadMessages', 'readMessages'));
-    }
-
-    // Mark a specific message as read
-    public function markAsRead(Request $request, $id)
-    {
-        // Find the message by id or fail if not found.
-        $message = Contact::findOrFail($id);
-
-        // Update the message status to 'read'.
-        $message->update(['is_read' => true]);
-
-        // Redirect to the message index page which contains all messages.
-        return redirect()->route('admin.message.index');
     }
 
     // Delete a specific message
