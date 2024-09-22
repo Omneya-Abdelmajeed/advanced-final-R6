@@ -24,8 +24,11 @@ class PublicController extends Controller
                 $query->where('published', true)->orderBy('views', 'desc')->take(3);
             }
         ])
-            ->limit(6) // limit to 6 categories
-            ->latest()
+            ->whereHas('topics', function ($query) {
+                $query->where('published', true); // Ensure to show only categories with published topics
+            })
+        //->latest()
+        //->limit(6) // limit to 6 categories
             ->get();
         // dd($categories);
 
