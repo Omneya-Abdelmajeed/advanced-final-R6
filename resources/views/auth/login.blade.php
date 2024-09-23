@@ -55,10 +55,26 @@
 
 						<img src="{{asset('admin/assets/images/password-svgrepo-com.svg')}}" alt="" class="input-group-text">
 					</div>
+					<div class="input-group mb-3">
+           
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+
+                <label class="form-check-label" for="remember">
+                  {{ __('Remember Me') }}
+                </label>
+              </div>
+            
+          </div>
 					<button class="btn btn-dark px-5 mb-2">
 						LOGIN
 						<img src="{{asset('admin/assets/images/arrow-sm-right-svgrepo-com.svg')}}" alt="">
 					</button>
+					@if (Route::has('password.request'))
+            <a class="fw-semibold fs-6 text-decoration-none text-dark" href="{{ route('password.request') }}">
+              {{ __('Forgot Your Password?') }}
+            </a>
+          @endif
 					<a href="{{ route('register') }}" class="fw-semibold fs-6 text-decoration-none text-dark">New User?</a>
 				</form>
 			</div>
